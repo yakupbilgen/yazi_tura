@@ -9,27 +9,40 @@ class YaziTura extends StatefulWidget {
 
 class _YaziTuraState extends State<YaziTura> {
   String imageUrl = "../assets/images/1tl.png";
-  String buttonText = "Yazı\nTura";
+  String buttonText = "Yazı mı?\nTura mı?";
+  int totalTura = 0;
+  int totalYazi = 0;
 
-  randNumberMethod() {
+  buildRandNumber() {
     Random rnd = Random();
     int rndNumber = rnd.nextInt(2);
     print(rndNumber);
     setState(() {
       if (rndNumber == 0) {
-        buttonText = "Yazı";
+        buttonText = "Yazı Geldi\nTekrar Dene";
         imageUrl = "../assets/images/1tlon.png";
+        totalYazi++;
       } else {
-        buttonText = "Tura";
+        buttonText = "Tura Geldi\nTekrar Dene";
         imageUrl = "../assets/images/1tlarka.png";
+        totalTura++;
       }
+    });
+  }
+
+  clearTotal() {
+    setState(() {
+      totalTura = 0;
+      totalYazi = 0;
+      buttonText = "Yazı mı?\nTura mı?";
+      imageUrl = "../assets/images/1tl.png";
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
-    double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Container(
@@ -40,15 +53,30 @@ class _YaziTuraState extends State<YaziTura> {
                 width: deviceWidth * 0.7,
                 height: deviceHeight * 0.7,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                  padding: const EdgeInsets.only(top: 100.0),
                   child: Image.asset(imageUrl),
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 50)),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Toplam tura: $totalTura \nToplam yazı: $totalYazi",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
               ElevatedButton(
-                onPressed: randNumberMethod,
-                child: Text(buttonText, style: TextStyle(fontSize: 50)),
-              )
+                onPressed: buildRandNumber,
+                child: Text(buttonText, style: TextStyle(fontSize: 30)),
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              ElevatedButton(
+                onPressed: clearTotal,
+                child: Text("Sıfırla", style: TextStyle(fontSize: 30)),
+              ),
             ],
           ),
         ),
