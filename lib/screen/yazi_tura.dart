@@ -8,7 +8,7 @@ class YaziTura extends StatefulWidget {
 }
 
 class _YaziTuraState extends State<YaziTura> {
-  String imageUrl = "../assets/images/1tl.png";
+  String imageUrl = "./assets/images/1tl.png";
   String buttonText = "Yazı mı?\nTura mı?";
   int totalTura = 0;
   int totalYazi = 0;
@@ -20,11 +20,11 @@ class _YaziTuraState extends State<YaziTura> {
     setState(() {
       if (rndNumber == 0) {
         buttonText = "Yazı Geldi\nTekrar Dene";
-        imageUrl = "../assets/images/1tlon.png";
+        imageUrl = "./assets/images/1tlon.png";
         totalYazi++;
       } else {
         buttonText = "Tura Geldi\nTekrar Dene";
-        imageUrl = "../assets/images/1tlarka.png";
+        imageUrl = "./assets/images/1tlarka.png";
         totalTura++;
       }
     });
@@ -35,7 +35,7 @@ class _YaziTuraState extends State<YaziTura> {
       totalTura = 0;
       totalYazi = 0;
       buttonText = "Yazı mı?\nTura mı?";
-      imageUrl = "../assets/images/1tl.png";
+      imageUrl = "./assets/images/1tl.png";
     });
   }
 
